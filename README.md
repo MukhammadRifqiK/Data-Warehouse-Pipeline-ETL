@@ -131,8 +131,9 @@ Transformasi utama:
 - Mengubah TransactionType menjadi huruf kapital
 - Menghapus transaksi duplikat berdasarkan TransactionID
 - Memastikan AccountID dan BranchID valid terhadap tabel dimensi
-
-
+________________________________________________________________________
+🔄 ETL
+------------------------------------------------------------------------
 
 
 
