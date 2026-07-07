@@ -20,12 +20,6 @@ GROUP BY CAST(TransactionDate AS DATE)
 end;
 EXEC DailyTransaction @Start_Date='2024-01-18', @End_Date='2024-01-20';
 
---hapus procedure--
-DROP PROCEDURE DailyTransaction;
-GO
---melihat isi kode sumber asli--
-EXEC sp_helptext'DailyTransaction'
-
 --===================--
 -- Balance per Customer --
 --===================--
@@ -51,15 +45,3 @@ where da.Status = 'active' and dc.CustomerName like '%'+@name+'%'
 group by dc.CustomerName, da.AccountType, da.Balance
 end;
 EXEC BalancePerCustomer @name='shelly';
-
-select *
-from DimAccount;
-
-select *
-from DimBranch;
-
-select *
-from DimCustomer;
-
-select *
-from FactTransaction;
