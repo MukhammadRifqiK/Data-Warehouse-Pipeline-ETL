@@ -1,4 +1,4 @@
-# Data Warehouse dan Pipeline ETL Perbankan
+# Data Warehouse dan Pipeline ETL Studi Kasus Perbankan
 _______________________________________________________________________
 📌 Pendahuluan
 -----------------------------------------------------------------------
@@ -8,19 +8,131 @@ _______________________________________________________________________
 -----------------------------------------------------------------------
 Klien memiliki data transaksi dan data master yang tersebar di beberapa sumber data, yaitu:
 
-File Excel
-File CSV
-Database SQL Server
+- File Excel
+- File CSV
+- Database SQL Server
 Data yang tersebar ini menyebabkan proses reporting menjadi terlambat karena data harus dikumpulkan dan diolah dari berbagai sumber secara manual. Selain itu, terdapat kemungkinan data transaksi duplikat dapat menyebabkan hasil analisis menjadi tidak akurat.
 
 Oleh karena itu, dibutuhkan sebuah solusi membangun sistem Data Warehouse dan pipeline ETL. Alasannya sebagai berikut:
-
-Mengintegrasi data dari beragam sumber
-Otomatisasi dalam membersihkan, hapus duplikat, melakukan standarisasi format data supaya terstruktur
-Data tervalidasi sebelum disimpan ke Data Warehouse
-Sistem yang telah dibangun hasilnya Pelaporan tepat waktu dan mudah diakses
+- Mengintegrasi data dari beragam sumber
+- Otomatisasi dalam membersihkan, hapus duplikat, melakukan standarisasi format data supaya terstruktur
+- Data tervalidasi sebelum disimpan ke Data Warehouse
+- Sistem yang telah dibangun hasilnya Pelaporan tepat waktu dan mudah diakses
 ________________________________________________________________________
-🎯 Objektivitas
+🎯 Tujuan
 ------------------------------------------------------------------------
+- Membangun Data Warehouse transaksi perbankan yang terpusat
+- Mengimplementasikan pipeline ETL menggunakan Python
+- Mengintegrasikan data dari berbagai sumber data
+- Melakukan pembersihan, hapus data duplikat didalam transformasi data
+- Melakukan validasi data dan menyimpan di Data Warehouse bernama DWH
+- Membuat Stored Procedure untuk kebutuhan pelaporan
+________________________________________________________________________
+🧾 Data mentah
+------------------------------------------------------------------------
+Project ini menggunakan beberapa sumber data yang terdiri dari database SQL Server dan file eksternal.
+
+|Source|Type|Description|
+| :---: | :---: | :--- |
+|transaction_db|SQL Server|Data transaksi dari database|
+|transaction_csv|CSV|Data transaksi dari file CSV|
+|transaction_excel|xlsx|Data transaksi dari file Excel|
+|account|SQL Server|Data rekening customer|
+|customer|SQL Server|Data customer|
+|branch|SQL Server|Data kantor cabang|
+|city|SQL Server|Data kota|
+|state|SQL Server|Data provinsi/state|
+________________________________________________________________________
+🏗️ Data Warehouse Schema
+------------------------------------------------------------------------
+Data Warehouse menggunakan model Star Schema dengan satu tabel fakta dan beberapa tabel dimensi
+
+**Dimension Tables**
+
+1. DimCustomer
+
+Tabel ini menyimpan informasi customer data city dan state.
+
+Kolom utama:
+
+- CustomerID
+- CustomerName
+- Address
+- CityName
+- StateName
+- Age
+- Gender
+- Email
+
+Transformasi utama:
+
+- Join tabel customer, city, dan state
+- Mengubah nama kolom menjadi PascalCase
+- Mengubah CustomerName, Address, CityName, StateName, dan Gender menjadi huruf kapital
+- Mengubah Age menjadi integer
+
+2. DimAccount
+
+Tabel ini menyimpan informasi rekening milik customer
+
+Kolom utama:
+
+- AccountID
+- CustomerID
+- AccountType
+- Balance
+- DateOpened
+- Status
+  
+Transformasi utama:
+
+- Mengubah nama kolom menjadi PascalCase
+- Mengubah DateOpened menjadi format date
+- Mengubah Balance menjadi numeric
+- Memastikan CustomerID valid terhadap DimCustomer
+
+3. DimBranch
+
+Tabel ini menyimpan informasi kantor cabang bank
+
+Kolom utama:
+
+- BranchID
+- BranchName
+- BranchLocation
+
+Transformasi utama:
+
+- Mengubah nama kolom menjadi PascalCase
+- Mengubah BranchName dan BranchLocation menjadi huruf kapital
+
+**Fact Table**
+
+FactTransaction
+
+Tabel ini menyimpan seluruh data transaksi dari berbagai sumber
+
+Kolom utama:
+
+- TransactionID
+- AccountID
+- TransactionDate
+- Amount
+- TransactionType
+- BranchID
+ 
+Transformasi utama:
+
+- Menggabungkan transaksi dari SQL Server, CSV, dan Excel
+- Mengubah nama kolom menjadi PascalCase
+- Mengubah TransactionDate menjadi format date
+- Mengubah Amount menjadi integer
+- Mengubah TransactionType menjadi huruf kapital
+- Menghapus transaksi duplikat berdasarkan TransactionID
+- Memastikan AccountID dan BranchID valid terhadap tabel dimensi
+
+
+
+
 
 
