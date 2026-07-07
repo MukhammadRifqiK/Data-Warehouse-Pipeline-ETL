@@ -11,6 +11,7 @@ Klien memiliki data transaksi dan data master yang tersebar di beberapa sumber d
 - File Excel
 - File CSV
 - Database SQL Server
+
 Data yang tersebar ini menyebabkan proses reporting menjadi terlambat karena data harus dikumpulkan dan diolah dari berbagai sumber secara manual. Selain itu, terdapat kemungkinan data transaksi duplikat dapat menyebabkan hasil analisis menjadi tidak akurat.
 
 Oleh karena itu, dibutuhkan sebuah solusi membangun sistem Data Warehouse dan pipeline ETL. Alasannya sebagai berikut:
