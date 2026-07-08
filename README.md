@@ -132,9 +132,79 @@ Transformasi utama:
 - Menghapus transaksi duplikat berdasarkan TransactionID
 - Memastikan AccountID dan BranchID valid terhadap tabel dimensi
 ________________________________________________________________________
-🔄 ETL
+🔄 Pipeline ETL
 ------------------------------------------------------------------------
+Pipeline ETL pada project ini terdiri dari beberapa tahapan:
 
+1. Extract
+Mengambil data dari sumber SQL Server, CSV, dan Excel.
 
+2. Transform
+Membersihkan data, mengganti nama kolom mengikuti kaidah PascalCase, melakukan join antar tabel, mengubah tipe data, dan menghapus duplikasi.
 
+3. Validate
+Memastikan data sudah sesuai sebelum dimuat ke Data Warehouse, seperti pengecekan primary key, duplicate value, dan foreign key.
+
+4. Load
+Setelah dipastikan sesuai kriteria muat data ke tabel Data Warehouse.
+________________________________________________________________________
+🧾Stored Procedures
+------------------------------------------------------------------------
+Pada project ini terdapat dua stored procedure untuk membantu pelaporan
+
+1. DailyTransaction
+
+Stored Procedure ini digunakan untuk menampilkan ringkasan transaksi harian berdasarkan rentang tanggal.
+
+Parameter:
+
+- @start_date
+- @end_date
+
+Output:
+
+- Date
+- TotalTransactions
+- TotalAmount
+
+2. BalancePerCustomer
+
+Stored Procedure ini digunakan untuk menghitung saldo akhir customer berdasarkan transaksi dan hanya active account. Perhitungannya seperti ini:
+
+- transactiontype deposit → Menjumlahkan balance
+- transactiontype lainnya → Mengurangi balance
+
+Parameter:
+
+- @name
+
+Output:
+
+- CustomerName
+- AccountType
+- Balance
+- CurrentBalance
+________________________________________________________________________
+📁 Struktur Proyek
+------------------------------------------------------------------------
+```text
+project_rakamin/
+|
+|── project_ssms_dw/
+|       └── DataWarehouseDWH.sql
+|       └── StoredProcedure.sql
+| 
+|── project_python/
+|        └── etl/
+|             └── etl.py
+|
+|── transaction_csv.csv
+|── transaction_excel.xlsx
+```
+________________________________________________________________________
+👤 Author
+------------------------------------------------------------------------
+Mukhammad Rifqi Khawari
+
+Data Enthusiast
 
