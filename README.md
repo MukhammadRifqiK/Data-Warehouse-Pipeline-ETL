@@ -192,16 +192,19 @@ Project Data-Warehouse-Pipeline-ETL
 │
 ├── README.md
 |
+|── dataset
+|      └── sample.bak
+|      └── transaction_csv.csv
+|      └── transaction_excel.xlsx
+|
 |── project_ssms_dw
 |       └── DataWarehouseDWH.sql
 |       └── StoredProcedure.sql
-| 
+|
 |── project_python
 |        └── etl
 |             └── etl.py
-|
-|── transaction_csv.csv
-|── transaction_excel.xlsx
+
 ```
 ________________________________________________________________________
 👤 Author
@@ -209,4 +212,5 @@ ________________________________________________________________________
 Jika memiliki masukan atau ingin berdiskusi mengenai project ini, silakan hubungi saya melalui:
 
 Linkedin: www.linkedin.com/in/mukhammadrifqikhawari
+
 Gmail: khawaririfqi@gmail.com
