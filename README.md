@@ -185,17 +185,19 @@ Output:
 - Balance
 - CurrentBalance
 ________________________________________________________________________
-📁 Struktur Proyek
+📁 Struktur Project
 ------------------------------------------------------------------------
-```text
-project_rakamin/
+```
+Project Data-Warehouse-Pipeline-ETL
+│
+├── README.md
 |
-|── project_ssms_dw/
+|── project_ssms_dw
 |       └── DataWarehouseDWH.sql
 |       └── StoredProcedure.sql
 | 
-|── project_python/
-|        └── etl/
+|── project_python
+|        └── etl
 |             └── etl.py
 |
 |── transaction_csv.csv
@@ -204,7 +206,7 @@ project_rakamin/
 ________________________________________________________________________
 👤 Author
 ------------------------------------------------------------------------
-Mukhammad Rifqi Khawari
+Jika memiliki masukan atau ingin berdiskusi mengenai project ini, silakan hubungi saya melalui:
 
-Data Enthusiast
-
+Linkedin: www.linkedin.com/in/mukhammadrifqikhawari
+Gmail: khawaririfqi@gmail.com
